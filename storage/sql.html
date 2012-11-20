@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>sql</title>
+		<meta name="description" content="" />
+		<meta name="author" content="THINKER" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		
+		<script>
+			
+$(document).ready(function() {
+	// Database name
+	// Version number
+	// Text description
+	// Estimated size of database
+	var db = openDatabase('mydb', '1.0', 'THINKER database', 2 * 1024 * 1024);
+	
+	db.transaction(function (tx) {
+	  tx.executeSql('CREATE TABLE if not exists foo (id unique, text)');
+	  tx.executeSql('INSERT INTO foo (id, text) VALUES ("THINKER", "Anyway... RUN? ")');
+	  tx.executeSql('INSERT INTO foo (id, text) VALUES ("THINKER2", "Can U run select query?")');
+	});				
+					 
+});
+			
+			
+		</script>		
+	</head>
+	<body>
+	</body>
+</html>

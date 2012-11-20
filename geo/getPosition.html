@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>getPosition</title>
+		<meta name="description" content="" />
+		<meta name="author" content="THINKER" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=a9ceaeb68ac505be24dcbd9568bd31ee"></script>
+		
+		<script>
+			$(document).ready(function( ) {
+				
+				var locator = navigator.geolocation;
+				
+				locator.getCurrentPosition(
+					function(position) {
+						
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						
+						alert(latitude +":"+longitude);
+						
+						showMap(position.coords);
+						 
+					}); 
+			});
+			
+			var oMap = null;
+			
+			function showMap(coords){
+			   var oPoint = new nhn.api.map.LatLng(coords.latitude, coords.longitude);
+			   
+				nhn.api.map.setDefaultPoint('LatLng');
+				
+				oMap = new nhn.api.map.Map('testMap' ,{
+						point : oPoint,
+						zoom : 10,
+						enableWheelZoom : true,
+						enableDragPan : true,
+						enableDblClickZoom : false,
+						mapMode : 0,
+						activateTrafficMap : false,
+						activateBicycleMap : false,
+						minMaxLevel : [ 5, 13 ],
+						size : new nhn.api.map.Size(500, 400)
+					});
+					
+
+ 				
+				var oSize = new nhn.api.map.Size(28, 37);
+				var oOffset = new nhn.api.map.Size(14, 37);
+				var oIcon = new nhn.api.map.Icon('http://static.naver.com/maps2/icons/pin_spot2.png', oSize, oOffset);
+				var oMarker = new nhn.api.map.Marker(oIcon, { title : '마커 : '});
+				
+				
+				oMap.addOverlay(oMarker);
+				oMarker.setPoint(oPoint);
+				
+	
+					
+			}
+			
+		</script>
+		
+
+		
+	</head>
+	<body>
+		<div>
+			<header>
+				<h1>getPosition</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+			<div>
+				<div id = "testMap" style="border:1px solid #000; width:500px; height:400px; margin:20px;"></div>
+
+			</div>
+			<footer>
+				<p>
+					&copy; Copyright  by THINKER
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>
