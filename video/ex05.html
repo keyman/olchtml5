@@ -44,7 +44,7 @@
 			$("#ff").bind("click", findForward);			
 			
 			$(video).bind("timeupdate", function() {
-				//console.log("timeudpate....");  
+				console.log("timeudpate....");  
 				$("#time").text("" + Math.floor(video.currentTime) +"/"+Math.floor(video.duration) );
 			});			
 			
